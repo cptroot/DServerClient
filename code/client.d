@@ -13,5 +13,11 @@ void main() {
 
   connection.sendTo([0xFF, 0xFF, 'p'], new InternetAddress(address, port));
   byte[100] buffer;
-  connection.receive(buffer);
+  Address sender;
+  bool recieved = false;
+  while (recieved == false) {
+    connection.receiveFrom(buffer, sender);
+    if (sender != inet) continue;
+    if (buffer == [0xFF, 0xFF, 'p']) recieved = true;
+  }
 }

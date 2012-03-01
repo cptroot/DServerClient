@@ -29,6 +29,7 @@ void main() {
       } else {
         switch (buffer[2]) {
           case 'p':
+            data = ['p'];
             listener.sendTo(header ~ data, address);
             break;
         }
