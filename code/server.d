@@ -14,7 +14,8 @@ void main() {
 
   byte[100] buffer;
 
-  byte[2] header = [0xFF, 0xFF];
+  byte[2] header = [cast(byte)0xFF, cast(byte)0xFF];
+  writeln(header);
 
   Address[] clients;
   bool running = true;
@@ -22,15 +23,20 @@ void main() {
     Address address;
     long result = listener.receiveFrom(buffer, address);
     if (result != 0 && result != Socket.ERROR) {
+      writeln(buffer);
       if (buffer[0..2] != header) continue;
       byte[] data;
+      writeln("received data");
       if (canFind(clients, address)) {
         
       } else {
+        writeln(buffer[2]);
         switch (buffer[2]) {
           case 'p':
             data = ['p'];
             listener.sendTo(header ~ data, address);
+            break;
+          default:
             break;
         }
       }

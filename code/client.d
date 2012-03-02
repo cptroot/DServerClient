@@ -11,13 +11,15 @@ void main() {
   string address = readln();
   InternetAddress inet = new InternetAddress(address, port);
 
-  connection.sendTo([0xFF, 0xFF, 'p'], new InternetAddress(address, port));
+  byte[2] header = [cast(byte)0xFF, cast(byte)0xFF];
+
+  connection.sendTo(header ~ [cast(byte)'p'], new InternetAddress(address, port));
   byte[100] buffer;
   Address sender;
   bool recieved = false;
   while (recieved == false) {
     connection.receiveFrom(buffer, sender);
     if (sender != inet) continue;
-    if (buffer == [0xFF, 0xFF, 'p']) recieved = true;
+    if (buffer == [cast(byte)0xFF, cast(byte)0xFF, 'p']) recieved = true;
   }
 }
