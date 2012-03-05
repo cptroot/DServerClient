@@ -23,14 +23,13 @@ void main() {
     Address address;
     long result = listener.receiveFrom(buffer, address);
     if (result != 0 && result != Socket.ERROR) {
-      writeln(buffer);
       if (buffer[0..2] != header) continue;
       byte[] data;
       writeln("received data");
+      writeln(buffer);
       if (canFind(clients, address)) {
         
       } else {
-        writeln(buffer[2]);
         switch (buffer[2]) {
           case 'p':
             data = ['p'];
