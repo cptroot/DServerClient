@@ -31,8 +31,8 @@ void main() {
         
       } else {
         switch (buffer[2]) {
-          case 'p':
-            data = ['p'];
+          case 0x01:
+            data = [0x01];
             listener.sendTo(header ~ data, address);
             break;
           default:

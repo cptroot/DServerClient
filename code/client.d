@@ -1,5 +1,6 @@
 import std.stdio;
 import std.socket;
+import std.datetime;
 
 void main() {
   ushort port = 19863;
@@ -17,7 +18,10 @@ void main() {
   writeln("binding");
   connection.bind(new InternetAddress(InternetAddress.PORT_ANY));
 
-  connection.sendTo(header ~ [cast(byte)'p'], new InternetAddress(address, port));
+  StopWatch sw = StopWatch(AutoStart.yes);
+  sw.start();
+
+  connection.sendTo(header ~ [cast(byte)0x01], new InternetAddress(address, port));
   byte[100] buffer;
   Address ASender;
   InternetAddress IASender;
@@ -27,7 +31,8 @@ void main() {
     if (result == 0 || result == Socket.ERROR) continue;
     IASender = cast(InternetAddress)ASender;
     if (IASender.port != inet.port || IASender.addr != inet.addr) continue;
-    writeln(buffer);
-    if (buffer[0..3] == [cast(byte)0xFF, cast(byte)0xFF, 'p']) recieved = true;
+    if (buffer[0..3] == [cast(byte)0xFF, cast(byte)0xFF, cast(byte)0x01]) recieved = true;
   }
+  sw.stop();
+  writeln(sw.peek().msecs);
 }
