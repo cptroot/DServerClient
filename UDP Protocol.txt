@@ -1,1 +1,35 @@
 0x01: ping
+0x02: connect
+ c>s
+  string username
+ s>c
+  string username
+then client sends 
+0x03: keep alive
+ c>s
+0x03: disconnect
+0x04: movement
+0x05: fire shot
+0x06: fire ninja rope
+0x07: damage
+0x08: reload
+0x09: switch weapon
+0x0A: rules
+ c>s
+  string username
+ s>c
+  string gamemode
+0x0B: map
+  s>c
+  byte packet_number
+0x0C: player list
+ s>c
+  int length
+  player:
+    string username
+    byte team
+0x0D: player
+  
+0x0E:
+0x0F:
+0x10:
