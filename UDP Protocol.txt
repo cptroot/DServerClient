@@ -7,6 +7,7 @@
 then client sends 
 0x03: keep alive
  c>s
+ s>c
 0x03: disconnect
 0x04: movement
 0x05: fire shot
