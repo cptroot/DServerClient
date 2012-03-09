@@ -10,10 +10,28 @@ then client sends
  s>c
 0x03: disconnect
 0x04: movement
+ c>s
+  float pos_x
+  float pos_y
+  float vel_x
+  float vel_y
 0x05: fire shot
+ c>s
+  float pos_x
+  float pos_y
+  float vel_x
+  float vel_y
 0x06: fire ninja rope
-0x07: damage
+ c>s
+  float pos_x
+  float pos_y
+  float vel_x
+  float vel_y
+0x07: health
+ s>c
+  byte health
 0x08: reload
+ c>s
 0x09: switch weapon
 0x0A: rules
  c>s
@@ -23,6 +41,7 @@ then client sends
 0x0B: map
   s>c
   byte packet_number
+  
 0x0C: player list
  s>c
   int length
@@ -30,7 +49,11 @@ then client sends
     string username
     byte team
 0x0D: player
-  
+ s>c
+  float pos_x
+  float pos_y
+  float vel_x
+  float vel_y
 0x0E:
 0x0F:
 0x10:
